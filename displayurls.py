@@ -38,7 +38,7 @@ class DisplayU(Toplevel):
 
 
         #List Box
-        self.listBox = Listbox(self.buttomFrame, width=100, height=31, bg='#A5C9CA', font='arial 12 bold')
+        self.listBox = Listbox(self.buttomFrame, width=100, height=25, bg='#A5C9CA', font='arial 12 bold')
         self.listBox.grid(row=0, column=0, padx=10)
         self.sb.config(command=self.listBox.yview())
         self.listBox.config(yscrollcommand=self.sb.set)
