@@ -14,7 +14,7 @@ class AddUrl:
     def __init__(self, root2):
         self.root2 = root2
 
- 
+        
    
         #Start
         #image

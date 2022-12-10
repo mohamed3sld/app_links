@@ -3,7 +3,6 @@ from tkinter import messagebox
 import sqlite3
 import webbrowser
 import re
-import time
 
 con = sqlite3.connect('database_urls.db')
 cur = con.cursor()
@@ -86,21 +85,23 @@ class DisplayU(Toplevel):
 
 
     def funcdelete(self):
-        selected_link = self.listBox.curselection()
-        link = self.listBox.get(selected_link)
-        id1 = int(link[:link.index(' ')])
+        try:
+            selected_link = self.listBox.curselection()
+            link = self.listBox.get(selected_link)
+            id1 = int(link[:link.index(' ')])
 
+            message = messagebox.askyesno('Warning', 'Are you sure you deleted the link?', icon='warning')
 
-        message = messagebox.askyesno('Warning', 'Are you sure you deleted the link?', icon='warning')
- 
-        if message == True:
-            try:
-                cur.execute("DELETE FROM links WHERE id=?", (id1,))
-                con.commit()
-                self.listBox.delete(selected_link)
-            except:
-                messagebox.showinfo('info', 'Link has no been deleted', icon='warning')
+            if message:
+                try:
+                    cur.execute("DELETE FROM links WHERE id=?", (id1,))
+                    con.commit()
+                    self.listBox.delete(selected_link)
+                except:
+                    messagebox.showinfo('info', 'Link has no been deleted', icon='warning')
 
+        except:
+            messagebox.showerror('Error', 'Please select the link you want to delete!', icon='warning')
 
 
 
@@ -115,10 +116,14 @@ class DisplayU(Toplevel):
 
 
     def funcgoToLink(self):
-        selected_link = self.listBox.curselection()
-        link = self.listBox.get(selected_link)
-        url = link[link.index('>')+3:]
-        webbrowser.open_new_tab(url)
+        try:
+            selected_link = self.listBox.curselection()
+            link = self.listBox.get(selected_link)
+            url = link[link.index('>')+3:]
+            webbrowser.open_new_tab(url)
+        except:
+            messagebox.showerror('Error', 'Please select the link to access it!', icon='warning')
+
     
 
 
@@ -150,13 +155,14 @@ class DisplayU(Toplevel):
 
 
     def update_1(self):
-        global link_id
-        selected_link = self.listBox.curselection()
-        link = self.listBox.get(selected_link)
-        link_id = int(link[:link.index(' ')])
-        update_link = Update_link()
-
- 
+        try:
+            global link_id
+            selected_link = self.listBox.curselection()
+            link = self.listBox.get(selected_link)
+            link_id = int(link[:link.index(' ')])
+            update_link = Update_link()
+        except:
+            messagebox.showerror('Error', 'Please select the link to change your information!', icon='warning')
 
 
 
