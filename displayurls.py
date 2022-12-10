@@ -11,7 +11,7 @@ cur = con.cursor()
 class DisplayU(Toplevel):
     def __init__(self):
         Toplevel.__init__(self)
-        self.geometry('1150x620')
+        self.geometry('1150x630')
         self.title('Display Links')
         self.resizable(False, False)
         self.iconbitmap("icons/app-development.ico")
@@ -37,7 +37,7 @@ class DisplayU(Toplevel):
 
 
         #List Box
-        self.listBox = Listbox(self.buttomFrame, width=100, height=25, bg='#A5C9CA', font='arial 12 bold')
+        self.listBox = Listbox(self.buttomFrame, width=100, height=25, bg='#A5C9CA', font='arial 12 bold', bd=8)
         self.listBox.grid(row=0, column=0, padx=10)
         self.sb.config(command=self.listBox.yview())
         self.listBox.config(yscrollcommand=self.sb.set)

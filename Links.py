@@ -48,15 +48,14 @@ class AddUrl:
         links2 = cur.execute('SELECT * FROM links').fetchall()
         list_urls = []
         for item in links2:
-            list_urls.append(item[2])
+            list_urls.append(item[2].lower())
 
 
         if re.findall(self.regex, self.addurl.get()):
             url = self.addurl.get()
             name = self.addname.get()
 
- 
-            if url in list_urls:
+            if url.lower() in list_urls:
                 messagebox.showinfo('Warning', 'This link is in the database!', icon='warning')
 
             else:
