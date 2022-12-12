@@ -3,6 +3,7 @@ from tkinter import messagebox
 import sqlite3
 from displayurls import DisplayU
 import re
+from tkinter import ttk
 
 
 
@@ -27,21 +28,20 @@ class AddUrl:
         self.regex = re.compile(r"(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))")
        
 
-        self.enturl = Label(self.root2, text='Enter The Url:', fg='#22A39F', bg='#434242', font='times 15 bold').place(x=40, y=40)
-        self.addurl = Entry(self.root2, width=30, bg='#F3EFE0', fg='#222222', font='arial 15 bold')
+        self.enturl = ttk.Label(self.root2, text='Enter The Url:', font='times 15 bold').place(x=40, y=40)
+        self.addurl = ttk.Entry(self.root2, width=30, font='arial 15 bold')
         self.addurl.place(x=240, y=40)
-        self.urlimage = Label(self.root2, image=self.icon_url_add, bg='#434242').place(x=590, y=40)
+        self.urlimage = ttk.Label(self.root2, image=self.icon_url_add).place(x=590, y=40)
 
-        self.entname = Label(self.root2, text='Enter The Name:', fg='#22A39F', bg='#434242', font='times 15 bold').place(x=40, y=100)
-        self.addname = Entry(self.root2, width=30, bg='#F3EFE0', fg='#222222', font='arial 15 bold')
+        self.entname = ttk.Label(self.root2, text='Enter The Name:', font='times 15 bold').place(x=40, y=100)
+        self.addname = ttk.Entry(self.root2, width=30, font='arial 15 bold')
         self.addname.place(x=240, y=100)
-        self.name = Label(self.root2, image=self.icon_name, bg='#434242').place(x=590, y=100)
-
+        self.name = ttk.Label(self.root2, image=self.icon_name).place(x=590, y=100)
 
 
         #Button
-        self.btn_add = Button(self.root2, text='  Add To DataBase', font='arial 15 bold', bg='#678983', fg='#181D31', image=self.icon_add, compound=LEFT, command=self.Funcadd).place(relx = 0.5, rely = 0.7, anchor = CENTER)
-        self.btn_display = Button(self.root2, text='Display Links', font='arial 12 bold', bg='#678983', fg='#181D31', command=self.funcdisplay).place(relx = 0.5, rely = 0.9, anchor = CENTER)
+        self.btn_add = ttk.Button(self.root2, text='  Add To DataBase', image=self.icon_add, compound=LEFT, command=self.Funcadd).place(relx = 0.5, rely = 0.7, anchor = CENTER)
+        self.btn_display = ttk.Button(self.root2, text='Display Links', command=self.funcdisplay).place(relx = 0.5, rely = 0.9, anchor = CENTER)
         #End
 
     def Funcadd(self):
@@ -92,5 +92,3 @@ def main():
 if __name__ == '__main__':
     main()
 
-
- 

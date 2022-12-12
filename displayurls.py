@@ -3,6 +3,7 @@ from tkinter import messagebox
 import sqlite3
 import webbrowser
 import re
+from tkinter import ttk
 
 con = sqlite3.connect('database_urls.db')
 cur = con.cursor()
@@ -11,7 +12,7 @@ cur = con.cursor()
 class DisplayU(Toplevel):
     def __init__(self):
         Toplevel.__init__(self)
-        self.geometry('1150x630')
+        self.geometry('1150x635')
         self.title('Display Links')
         self.resizable(False, False)
         self.iconbitmap("icons/app-development.ico")
@@ -19,38 +20,38 @@ class DisplayU(Toplevel):
         self.regex2 = re.compile(r'^[a-zA-Z0-9].{1,50}')
     
         #Frames
-        self.top = Frame(self, height=120, bg='white')
+        self.top = ttk.Frame(self, height=120)
         self.top.pack(fill=X)
-        self.buttomFrame = Frame(self, height=500, bg='#395B64')
+        self.buttomFrame = ttk.Frame(self, height=500)
         self.buttomFrame.pack(fill=X)
 
 
         self.top_image = PhotoImage(file='icons/links.png')
-        self.top_image_lbl = Label(self.top, image=self.top_image, bg='white')
+        self.top_image_lbl = ttk.Label(self.top, image=self.top_image)
         self.top_image_lbl.place(x=120, y=10)
-        self.heading = Label(self.top, text='Links Page', font='arial 25 bold', fg='#2C3333', bg='white')
+        self.heading = ttk.Label(self.top, text='Links Page', font='arial 25 bold')
         self.heading.place(x=260, y=40)
 
 
         #Scroll For ListBox
-        self.sb = Scrollbar(self.buttomFrame, orient=VERTICAL)
+        self.sb = ttk.Scrollbar(self.buttomFrame, orient=VERTICAL)
 
 
         #List Box
-        self.listBox = Listbox(self.buttomFrame, width=100, height=25, bg='#A5C9CA', font='arial 12 bold', bd=8)
+        self.listBox = Listbox(self.buttomFrame, width=100, height=25, bg='white', font='arial 12 bold', bd=8)
         self.listBox.grid(row=0, column=0, padx=10)
-        self.sb.config(command=self.listBox.yview())
         self.listBox.config(yscrollcommand=self.sb.set)
-        self.sb.grid(row=0, column=1, sticky=N+S)
+        self.sb.config(command=self.listBox.yview())
+        self.sb.grid(row=0, column=1, sticky=S+N)
 
 
         #button
         self.updateicon = PhotoImage(file='icons/update.png')
         self.deleteicon = PhotoImage(file='icons/delete.png')
         self.go_to_link = PhotoImage(file='icons/go_to_link.png')
-        self.btn_delete = Button(self.buttomFrame, text='  Delete Link  ', font='times 14 bold', bg='#E7F6F2', command=self.funcdelete, compound=LEFT, image=self.deleteicon, width=140).place(x=970, y=20)
-        self.btn_go = Button(self.buttomFrame, text='  Open Link  ', font='times 14 bold', bg='#E7F6F2', command=self.funcgoToLink, compound=LEFT, image=self.go_to_link, width=140).place(x=970, y=75)
-        self.btn_update = Button(self.buttomFrame, text=' Update Link ', font='times 14 bold', bg='#E7F6F2', command=self.update_1, compound=LEFT, image=self.updateicon, width=140).place(x=970, y=130)
+        self.btn_delete = ttk.Button(self.buttomFrame, text='  Delete Link  ', command=self.funcdelete, compound=LEFT, image=self.deleteicon, width=20).place(x=970, y=20)
+        self.btn_go = ttk.Button(self.buttomFrame, text='  Open Link  ', command=self.funcgoToLink, compound=LEFT, image=self.go_to_link, width=20).place(x=970, y=75)
+        self.btn_update = ttk.Button(self.buttomFrame, text=' Update Link ', command=self.update_1, compound=LEFT, image=self.updateicon, width=20).place(x=970, y=130)
 
 
 
@@ -58,10 +59,10 @@ class DisplayU(Toplevel):
         global btn_reset
         self.icon_search = PhotoImage(file='icons/search.png')
         self.icon_reset = PhotoImage(file='icons/reset.png')
-        self.search = Entry(self.top, font='arial 15 bold', width=30, bg='#E7F6F2', fg='#2C3333', bd=5)
+        self.search = ttk.Entry(self.top, font='arial 15 bold', width=30)
         self.search.place(relx=0.6, y=37, x=80)
-        self.btn_search = Button(self.top, text='  Search  ', font='times 11 bold', bg='#E7F6F2', fg='#2C3333' , image=self.icon_search , command=self.funcsearch , compound=LEFT, height=22).place(x=675, y=40)
-        btn_reset = Button(self.top, text='  Reset  ', font='times 11 bold', bg='#E7F6F2', fg='#2C3333' , image=self.icon_reset , command=self.funcreset, width=80, compound=LEFT, height=22)
+        self.btn_search = ttk.Button(self.top, text='  Search  ', image=self.icon_search , command=self.funcsearch, width=10 , compound=LEFT).place(x=675, y=40)
+        btn_reset = ttk.Button(self.top, text='  Reset  ', image=self.icon_reset , command=self.funcreset, width=10, compound=LEFT)
         btn_reset.place(x=580, y=40)
 
 
@@ -78,7 +79,7 @@ class DisplayU(Toplevel):
             count += 1
 
         #LABEL COUNT
-        self.counter = Label(self.buttomFrame, text=f'{count}\nLINKS', bg='#395B64', fg='#E6DDC4', font='times 40 bold')
+        self.counter = Label(self.buttomFrame, text=f'{count}\nLINKS', font='times 40 bold', fg='gray')
         self.counter.place(x=958, y=210)
         #___________
 
