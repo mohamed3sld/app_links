@@ -131,16 +131,16 @@ class DisplayU(Toplevel):
 
     def funcsearch(self, *args):
         search_text = self.search.get()# The text that was typed in the search input.
-        if re.findall(self.regex2, search_text):
-            result = cur.execute("SELECT * FROM links").fetchall() 
-            self.listBox.delete(0, END)
+        self.listBox.delete(0, END)
+        result = cur.execute("SELECT * FROM links").fetchall()
 
-            for i in result:
-                if search_text.lower() in i[1].lower():
-                    self.listBox.insert(0, str(i[0])+'  --------  '+i[1]+'  -------- >  '+i[2])
+        for i in result:
+            if search_text.lower() in i[1].lower():
+                self.listBox.insert(0, str(i[0])+'  --------  '+i[1]+'  -------- >  '+i[2])
 
-            btn_reset.config(state='normal')
+        btn_reset.config(state='normal')
            
+
 
 
     def funcreset(self):
