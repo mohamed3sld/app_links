@@ -65,10 +65,11 @@ class DisplayU(Toplevel):
         btn_reset = ttk.Button(self.top, text='  Reset  ', image=self.icon_reset , command=self.funcreset, width=10, compound=LEFT)
         btn_reset.place(x=580, y=40)
 
+        #keys keyboard
+        self.search.bind('<Return>', self.funcsearch)
 
- 
-        
- 
+
+
 
 
 
@@ -128,7 +129,7 @@ class DisplayU(Toplevel):
     
 
 
-    def funcsearch(self):
+    def funcsearch(self, *args):
         search_text = self.search.get()# The text that was typed in the search input.
         if re.findall(self.regex2, search_text):
             result = cur.execute("SELECT * FROM links").fetchall() 
@@ -182,7 +183,6 @@ class Update_link(Toplevel):
         link = cur.execute('SELECT * FROM links WHERE id=?', (link_id,)).fetchall()
         url = link[0][2]
         name = link[0][1]
-
 
 
         self.icon_add = PhotoImage(file='icons/add.png')
