@@ -213,20 +213,23 @@ class Update_link(Toplevel):
  
     
     def funcupdate(self):
-        url = self.addurl.get()
-        name = self.addname.get()
+        if re.findall(self.regex, self.addurl.get()):
+            url = self.addurl.get()
+            name = self.addname.get()
 
-        message = messagebox.askyesno('Warning', 'Are You Sure?', icon='warning')
-        if message == True:
-            try:
-                query = "UPDATE links set url=?, name=? WHERE id=?"
-                cur.execute(query, (url, name, link_id))
-                con.commit()
-                messagebox.showinfo('Success', 'Link has been updated', icon='info')
-                self.destroy()
-                btn_reset.config(state='normal')
-                
- 
-                
-            except:
-                messagebox.showinfo('Warning', 'Link has not been updated', icon='warning')
+            message = messagebox.askyesno('Warning', 'Are You Sure?', icon='warning')
+            if message == True:
+                try:
+                    query = "UPDATE links set url=?, name=? WHERE id=?"
+                    cur.execute(query, (url, name, link_id))
+                    con.commit()
+                    messagebox.showinfo('Success', 'Link has been updated', icon='info')
+                    self.destroy()
+                    btn_reset.config(state='normal')
+
+
+
+                except:
+                    messagebox.showinfo('Warning', 'Link has not been updated', icon='warning')
+        else:
+            messagebox.showinfo('Warning', 'This Link is Wrong', icon='warning')
