@@ -76,7 +76,7 @@ class DisplayU(Toplevel):
         links = cur.execute('SELECT * FROM links').fetchall()
         count = 0
         for link in links:
-            self.listBox.insert(count, str(link[0])+'  --------  '+link[1]+'  -------- >  '+link[2])
+            self.listBox.insert(count, str(count+1)+'  --------  '+link[1]+'  -------- >  '+link[2])
             count += 1
 
         #LABEL COUNT
@@ -148,7 +148,7 @@ class DisplayU(Toplevel):
         links = cur.execute('SELECT * FROM links').fetchall()# Select all items in the DataBase to add to the ListBox again.
         count1 = 0 
         for link in links:# Loop over elements that are called from the database.
-            self.listBox.insert(count1, str(link[0])+'  --------  '+link[1]+'  -------- >  '+link[2])
+            self.listBox.insert(count1, str(count1+1)+'  --------  '+link[1]+'  -------- >  '+link[2])
             count1 += 1
  
         self.counter.configure(text=f'{count1}\nLINKS')
